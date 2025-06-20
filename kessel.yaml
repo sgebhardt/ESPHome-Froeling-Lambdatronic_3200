@@ -1,41 +1,32 @@
-sensor:  
+sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Kesseltemperatur"
-    id: ${name}_Kesseltemperatur
+    name: "Kesseltemperatur"
+    id: Kesseltemperatur
     register_type: read
     address: 0
     unit_of_measurement: "°C"
     device_class: "temperature"
     state_class: "measurement"
-    value_type: U_WORD 
+    value_type: U_WORD
     filters:
       - multiply: 0.5
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Abgastemperatur"
-    id: ${name}_Abgastemperatur
+    name: "Abgastemperatur"
+    id: Abgastemperatur
     register_type: read
     address: 1
     unit_of_measurement: "°C"
     device_class: "temperature"
     state_class: "measurement"
-    value_type: U_WORD 
- 
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Verbleibende Heizstunden bis zur Asche entleeren Warnung"
-    id: ${name}_Verbleibende_Heizstunden_bis_zur_Asche_entleeren_Warnung
-    register_type: read
-    address: 86
-    unit_of_measurement: "h"
     value_type: U_WORD
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Saugzug - Ansteuerung"
-    id: ${name}_Saugzug_Ansteuerung
+    name: "Saugzug - Ansteuerung"
+    id: Saugzug_Ansteuerung
     register_type: read
     address: 13
     unit_of_measurement: "%"
@@ -43,8 +34,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Saugzugdrehzahl"
-    id: ${name}_Saugzugdrehzahl
+    name: "Saugzugdrehzahl"
+    id: Saugzugdrehzahl
     register_type: read
     address: 6
     unit_of_measurement: "rpm"
@@ -52,8 +43,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Sauerstoffregler"
-    id: ${name}_Sauerstoffregler
+    name: "Sauerstoffregler"
+    id: Sauerstoffregler
     register_type: read
     address: 16
     unit_of_measurement: "%"
@@ -61,8 +52,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Restsauerstoffgehalt"
-    id: ${name}_Restsauerstoffgehalt
+    name: "Restsauerstoffgehalt"
+    id: Restsauerstoffgehalt
     register_type: read
     address: 3
     unit_of_measurement: "%"
@@ -70,24 +61,24 @@ sensor:
     value_type: U_WORD
     filters:
       - multiply: 0.1
-  
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Rücklauffühler"
-    id: ${name}_Ruecklauffuehler
-    register_type: read
-    address: 9
-    unit_of_measurement: "°C"
-    device_class: "temperature"
-    state_class: "measurement"
-    value_type: U_WORD
-    filters:
-      - multiply: 0.5
+
+  # - platform: modbus_controller
+  #   modbus_controller_id: ${modbus_controller_id}
+  #   name: "Rücklauffühler"
+  #   id: Ruecklauffuehler
+  #   register_type: read
+  #   address: 9
+  #   unit_of_measurement: "°C"
+  #   device_class: "temperature"
+  #   state_class: "measurement"
+  #   value_type: U_WORD
+  #   filters:
+  #     - multiply: 0.5
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Primärluft"
-    id: ${name}_Primaerluft
+    name: "Primärluft"
+    id: Primaerluft
     register_type: read
     address: 11
     unit_of_measurement: "%"
@@ -95,8 +86,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Sekundärluft"
-    id: ${name}_Sekundaerluft
+    name: "Sekundärluft"
+    id: Sekundaerluft
     register_type: read
     address: 12
     unit_of_measurement: "%"
@@ -104,8 +95,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Betriebsstunden"
-    id: ${name}_Betriebsstunden
+    name: "Betriebsstunden"
+    id: Betriebsstunden
     register_type: read
     address: 20
     unit_of_measurement: "h"
@@ -113,8 +104,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Stunden seit letzter Wartung"
-    id: ${name}_Stunden_seit_letzter_Wartung
+    name: "Stunden seit letzter Wartung"
+    id: Stunden_seit_letzter_Wartung
     register_type: read
     address: 55
     unit_of_measurement: "h"
@@ -122,20 +113,19 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Betriebsstunden in der Feuererhaltung"
-    id: ${name}_Betriebsstunden_in_der_Feuererhaltung
+    name: "Betriebsstunden in der Feuererhaltung"
+    id: Betriebsstunden_in_der_Feuererhaltung
     register_type: read
     address: 24
     unit_of_measurement: "h"
     value_type: U_WORD
-
-binary_sensor:
-  - platform: template
-    name: "${name} Kesselzustand Heizen"
-    id: ${name}_Kesselzustand_Heizen
-    lambda: |-
-      if (id(${name}_Kesselzustand).state == "Heizen") {
-        return true;
-      } else {
-        return false;
-      }
+# binary_sensor:
+#   - platform: template
+#     name: "Kesselzustand Heizen"
+#     id: Kesselzustand_Heizen
+#     lambda: |-
+#       if (id(Kesselzustand).state == "Heizen") {
+#         return true;
+#       } else {
+#         return false;
+#       }

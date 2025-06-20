@@ -1,8 +1,8 @@
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Boiler 1 Temperatur oben"
-    id: ${name}_Boiler_1_Temperatur_oben
+    name: "Boiler Temperatur oben"
+    id: Boiler_Temperatur_oben
     register_type: read
     address: 1630
     unit_of_measurement: "°C"
@@ -14,8 +14,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Boiler 1 Pumpe Ansteuerung"
-    id: ${name}_Boiler_1_Pumpe_Ansteuerung
+    name: "Boiler Pumpe Ansteuerung"
+    id: Boiler_Pumpe_Ansteuerung
     register_type: read
     address: 1632
     unit_of_measurement: "%"
@@ -24,8 +24,8 @@ sensor:
 number:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Boiler 1 Gewünschte Boilertemperatur"
-    id: ${name}_Boiler_1_Gewuenschte_Boilertemperatur
+    name: "Boiler Gewünschte Boilertemperatur"
+    id: Boiler_Gewuenschte_Boilertemperatur
     address: 1631
     unit_of_measurement: "°C"
     value_type: U_WORD
@@ -35,8 +35,8 @@ number:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${name} Boiler 1 Nachladen, wenn Boilertemperatur unter"
-    id: ${name}_Boiler_1_Nachladen_wenn_Boilertemperatur_unter
+    name: "Boiler Nachladen, wenn Boilertemperatur unter"
+    id: Boiler_Nachladen_wenn_Boilertemperatur_unter
     address: 1632
     unit_of_measurement: "°C"
     value_type: U_WORD
@@ -46,10 +46,10 @@ number:
 
 binary_sensor:
   - platform: template
-    name: "${name} Boiler 1 Pumpe Ansteuerung AN AUS"
-    id: ${name}_Boiler_1_Pumpe_Ansteuerung_AN_AUS
+    name: "Boiler Pumpe Ansteuerung AN AUS"
+    id: Boiler_Pumpe_Ansteuerung_AN_AUS
     lambda: |-
-      if (id(${name}_Boiler_1_Pumpe_Ansteuerung).state > 0) {
+      if (id(Boiler_Pumpe_Ansteuerung).state > 0) {
         return true;
       } else {
         return false;
